@@ -13,6 +13,11 @@ const menus = [
     exact: false
   },
   {
+    label: 'Products',
+    to: '/products',
+    exact: false
+  },
+  {
     label: 'Link1',
     to: '/link1',
     exact: false
@@ -39,7 +44,7 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
           <li className={`my-li ${active}`}>
             <Link
               className="nav-link"
-              exact to={to}>
+              to={to}>
               {label}
             </Link>
           </li>
