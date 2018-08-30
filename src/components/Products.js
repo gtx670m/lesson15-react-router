@@ -39,13 +39,20 @@ class Products extends Component {
     return (
       <div className="container">
         <h1>Danh sách sản phẩm</h1>
+        <br />
         <div className="row">
-          <ul className="list-group">
-            {showProducts(products)}
-          </ul>
+          <div class="col-12">
+            <ul className="list-group">
+              {showProducts(products)}
+            </ul>
+          </div>
+
         </div>
+        <br />
         <div className="row">
-          <Route path="/products/:name" component={Product} />
+          <div class="col-12">
+            <Route path="/products/:name" component={Product} />
+          </div>
         </div>
       </div >
     );

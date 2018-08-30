@@ -32,6 +32,11 @@ const menus = [
     to: '/link3',
     exact: false
   },
+  {
+    label: 'Login',
+    to: '/login',
+    exact: false
+  }
 ]
 
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
