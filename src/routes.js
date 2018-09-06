@@ -6,6 +6,7 @@ import NotFound from './components/NotFound';
 import Contact from './components/Contact';
 import Products from './components/Products';
 import Login from './components/Login';
+import Logout from './components/Logout';
 
 const routes = [
   {
@@ -47,6 +48,11 @@ const routes = [
     path: '/login',
     exact: false,
     main: () => <Login />
+  },
+  {
+    path: '/logout',
+    exact: false,
+    main: () => <Logout />
   },
   {
     path: '',

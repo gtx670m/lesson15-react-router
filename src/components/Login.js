@@ -1,33 +1,44 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtUsername: '',
-      txtPassword: ''
-    }
-  }
-  onChange = (e) => {
-    let { target } = e;
-    let { name } = target;
-    let value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: [value]
-    });
-  }
-  onSubmit = (e) => {
-    e.preventDefault();
-    let { txtUsername, txtPassword } = this.state;
-    if (txtUsername === 'admin' && txtPassword === 'admin') {
-      localStorage.setItem('user', JSON.stringify({
-        username: txtUsername,
-        password: txtPassword
-      }));
+      txtUsername: "",
+      txtPassword: "",
+      loggedInUser: localStorage.getItem("user")
     };
   }
-  render() {
+  onChange = e => {
+    let { target } = e;
+    let { name } = target;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    this.setState({
+      [name]: value
+    });
+  };
+  onSubmit = e => {
+    e.preventDefault();
     let { txtUsername, txtPassword } = this.state;
+    if (txtUsername === "admin" && txtPassword === "admin") {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          username: txtUsername,
+          password: txtPassword
+        })
+      );
+    }
+    this.setState({
+      loggedInUser: localStorage.getItem("user")
+    });
+  };
+
+  render() {
+    let { txtUsername, txtPassword, loggedInUser } = this.state;
+    if (loggedInUser !== null) {
+      return <Redirect to="/products" />;
+    }
     return (
       <div className="container">
         <div className="row">
@@ -38,7 +49,7 @@ class Login extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name='txtUsername'
+                  name="txtUsername"
                   value={txtUsername}
                   onChange={this.onChange}
                 />
@@ -48,22 +59,24 @@ class Login extends Component {
                 <input
                   type="password"
                   className="form-control"
-                  name='txtPassword'
+                  name="txtPassword"
                   value={txtPassword}
                   onChange={this.onChange}
                 />
               </div>
               <div className="form-group form-check">
                 <label className="form-check-label">
-                  <input className="form-check-input" type="checkbox" /> Remember me
+                  <input className="form-check-input" type="checkbox" />{" "}
+                  Remember me
                 </label>
               </div>
-              <button type="submit" className="btn btn-primary">Login</button>
+              <button type="submit" className="btn btn-primary">
+                Login
+              </button>
             </form>
           </div>
         </div>
       </div>
-
     );
   }
 }

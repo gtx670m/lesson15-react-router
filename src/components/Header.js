@@ -1,66 +1,72 @@
-import React, { Component } from 'react';
-import { NavLink, Route, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { NavLink, Route, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const menus = [
   {
-    label: 'About',
-    to: '/about',
+    label: "About",
+    to: "/about",
     exact: true
   },
   {
-    label: 'Contact',
-    to: '/contact',
+    label: "Contact",
+    to: "/contact",
     exact: false
   },
   {
-    label: 'Products',
-    to: '/products',
+    label: "Products",
+    to: "/products",
     exact: false
   },
   {
-    label: 'Link1',
-    to: '/link1',
+    label: "Link1",
+    to: "/link1",
     exact: false
   },
   {
-    label: 'Link2',
-    to: '/link2',
+    label: "Link2",
+    to: "/link2",
     exact: false
   },
   {
-    label: 'Link3',
-    to: '/link3',
+    label: "Link3",
+    to: "/link3",
     exact: false
   },
   {
-    label: 'Login',
-    to: '/login',
+    label: "Login",
+    to: "/login",
+    exact: false
+  },
+  {
+    label: "Logout",
+    to: "/logout",
     exact: false
   }
-]
+];
 
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
   return (
-    <Route path={to} exact={activeOnlyWhenExact}
+    <Route
+      path={to}
+      exact={activeOnlyWhenExact}
       children={({ match }) => {
-        let active = match ? 'active etc' : '';
+        let active = match ? "active etc" : "";
         return (
           // <li className={active}>
           <li className={`my-li ${active}`}>
-            <Link
-              className="nav-link"
-              to={to}>
+            <Link className="nav-link" to={to}>
               {label}
             </Link>
           </li>
-        )
+        );
       }}
     />
-  )
-}
+  );
+};
 
 class Header extends Component {
-  showMenus = (menus) => {
+  showMenus = menus => {
     let result = null;
     if (menus.length > 0) {
       result = menus.map((menu, index) => {
@@ -69,13 +75,18 @@ class Header extends Component {
             key={index}
             label={menu.label}
             to={menu.to}
-            activeOnlyWhenExact={menu.exact} />
-        )
+            activeOnlyWhenExact={menu.exact}
+          />
+        );
       });
     }
     return result;
-  }
-
+  };
+  handleClick = () => {
+    localStorage.removeItem("user");
+    alert("Đã đăng xuất");
+    return <Redirect to="/login" />;
+  };
   render() {
     return (
       <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -89,7 +100,10 @@ class Header extends Component {
               //   color: 'red'
               // }}
               activeClassName="active" //use available active class of
-              exact to="/">Home
+              exact
+              to="/"
+            >
+              Home
             </NavLink>
           </li>
           {this.showMenus(menus)}

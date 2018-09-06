@@ -41,7 +41,7 @@ class Products extends Component {
         <h1>Danh sách sản phẩm</h1>
         <br />
         <div className="row">
-          <div class="col-12">
+          <div className="col-12">
             <ul className="list-group">
               {showProducts(products)}
             </ul>
@@ -50,7 +50,7 @@ class Products extends Component {
         </div>
         <br />
         <div className="row">
-          <div class="col-12">
+          <div className="col-12">
             <Route path="/products/:name" component={Product} />
           </div>
         </div>
